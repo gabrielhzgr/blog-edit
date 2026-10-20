@@ -1,0 +1,11 @@
+nav {
+  border-bottom: thin solid black;
+  padding: 20px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
