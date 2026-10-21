@@ -6,17 +6,21 @@ import Nav from "../../Components/Nav/Nav.jsx";
 function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { error, setError } = useAuth();
+
+  useEffect(() => {
+    if (error) {
+      throw error;
+    }
+    return () => setError(null);
+  }, [error]);
 
   const { login } = useAuth();
 
   async function handleSubmit(e) {
-    try {
-      e.preventDefault();
-      e.target.querySelector("button").disabled = true;
-      await login({ username, password });
-    } catch (err) {
-      throw err;
-    }
+    e.preventDefault();
+    e.target.querySelector("button").disabled = true;
+    await login({ username, password });
   }
   return (
     <>

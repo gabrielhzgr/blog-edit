@@ -17,6 +17,8 @@ export default function ErrorPage() {
       title = "You are not authorized to use this resource";
     } else if (error.status == 404) {
       title = "This route does not exist";
+    } else {
+      title = "Bad request";
     }
     message = error.statusText;
   } else if (error instanceof Error) {

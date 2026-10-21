@@ -5,7 +5,7 @@ import { redirect, useNavigate } from "react-router";
 import router from "../router.jsx";
 const AuthContext = createContext(null);
 
-const AuthProvider = ({ children }) => {
+function AuthProvider({ children }) {
   const localUser = localStorage.getItem("user");
   const localToken = localStorage.getItem("token");
 
@@ -16,28 +16,31 @@ const AuthProvider = ({ children }) => {
     localToken == "undefined" ? null : JSON.parse(localToken),
   );
 
+  const [error, setError] = useState(null);
+
   console.log(token);
   console.log(user);
 
-  if (token && isValidToken(token)) {
-    console.log("not valid");
-
-    setToken(null);
+  if (token && !isValidToken(token)) {
     setUser(null);
+    setToken(null);
   }
 
   async function login(credentials) {
-    const { user, token } = await db.user.login(credentials);
+    const { user, token, error } = await db.user.login(credentials);
+    if (error) {
+      setError(error);
+    } else {
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", JSON.stringify(token));
 
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("token", JSON.stringify(token));
+      console.log("loging");
 
-    console.log("loging");
+      setUser(user);
+      setToken(token);
 
-    setUser(user);
-    setToken(token);
-
-    router.navigate("/");
+      router.navigate("/");
+    }
   }
 
   async function logout() {
@@ -51,8 +54,10 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext value={{ user, token, login, logout }}>{children}</AuthContext>
+    <AuthContext value={{ user, token, error, setError, login, logout }}>
+      {children}
+    </AuthContext>
   );
-};
+}
 
 export { AuthProvider, AuthContext };

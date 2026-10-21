@@ -1,5 +1,5 @@
 import ms from "ms";
 
 export default function isValidToken(token) {
-  return token.iat + ms(token.expiresIn) < Date.now();
+  return Date.now() > token.iat + ms(token.expiresIn);
 }
