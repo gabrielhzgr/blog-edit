@@ -30,7 +30,7 @@ export default function ErrorPage() {
     <div id="error">
       <h1>{title}</h1>
       <p>{message}</p>
-      <Link to={-1}>Go back</Link>
+      <Link to=".">Go back</Link>
       <NavLink></NavLink>
     </div>
   );
