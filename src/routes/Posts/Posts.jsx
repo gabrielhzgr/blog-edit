@@ -1,6 +1,6 @@
 import useAuth from "../../hooks/useAuth";
 import "./Posts.css";
-import Fallback from "../Fallback/Fallback";
+
 import { Link, Outlet, useOutletContext, useParams } from "react-router";
 import { useEffect, useState } from "react";
 
@@ -23,11 +23,24 @@ function Posts() {
 
 function ViewPost() {
   const { posts } = useOutletContext();
-  const { postId } = useParams();
+  const { index } = useParams();
 
-  console.log(posts);
+  let post = posts[index];
 
-  return <article>{posts[postId].content}</article>;
+  return (
+    <article>
+      <Link to="edit">Edit</Link>
+      <Link to="delete">Delete</Link>
+      {!post.is_published ? (
+        <Link to="publish">Publish</Link>
+      ) : (
+        <Link to="unpublish">Unpublish</Link>
+      )}
+      <Link to=""></Link>
+
+      {posts[index].content}
+    </article>
+  );
 }
 
 export { Posts, ViewPost };
