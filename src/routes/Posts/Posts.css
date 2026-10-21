@@ -1,7 +1,12 @@
+main {
+  align-items: flex-start;
+}
+
 section {
-  flex: 1;
-  padding: 20px;
   display: flex;
+  margin-top: 10px;
+  flex: 1;
+  min-height: 100vh;
 }
 
 section article {
@@ -12,4 +17,25 @@ aside {
   flex: 1;
   display: flex;
   flex-direction: column;
+  border-right: thin solid grey;
+  padding: 0px var(--padding) var(--padding) var(--padding);
+}
+
+aside > * {
+  border-bottom: thin solid grey;
+}
+
+h1 {
+  border-bottom: none;
+  margin-bottom: 10px;
+}
+
+article {
+  padding: 0px var(--padding) var(--padding) var(--padding);
+}
+
+ul.action-menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
 }

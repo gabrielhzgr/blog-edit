@@ -6,8 +6,15 @@ import router from "../router.jsx";
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
+  const localUser = localStorage.getItem("user");
+  const localToken = localStorage.getItem("token");
+
+  const [user, setUser] = useState(
+    localUser == "undefined" ? null : JSON.parse(localUser),
+  );
+  const [token, setToken] = useState(
+    localToken == "undefined" ? null : JSON.parse(localToken),
+  );
 
   console.log(token);
   console.log(user);

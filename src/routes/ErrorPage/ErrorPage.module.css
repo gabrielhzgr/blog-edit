@@ -1,0 +1,12 @@
+#root {
+  justify-content: flex-start;
+}
+
+div#error {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  border-bottom: thin solid grey;
+}

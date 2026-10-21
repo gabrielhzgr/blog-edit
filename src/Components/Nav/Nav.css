@@ -1,6 +1,6 @@
 nav {
   border-bottom: thin solid black;
-  padding: 20px;
+  padding: var(--padding);
 }
 
 ul {

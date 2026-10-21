@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router";
-
+import "../Posts/Posts.css";
 function EditPost() {
-  return <>Edit post</>;
+  return <article>Edit post</article>;
 }
 
 export default EditPost;

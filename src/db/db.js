@@ -60,8 +60,16 @@ class User {
       },
     });
 
-    const user = await response.json();
-    return user;
+    if (response.status == 200) {
+      const { user, token } = await response.json();
+      return { user, token };
+    } else {
+      const error = await response.json();
+      throw new Response("ResponseError", {
+        status: response.status,
+        statusText: error.error,
+      });
+    }
   }
 }
 

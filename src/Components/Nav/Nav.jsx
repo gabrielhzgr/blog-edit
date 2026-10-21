@@ -15,13 +15,13 @@ export default function Nav() {
     <nav>
       <ul>
         <li>
-          <i>Logo</i>
+          <Link to="/posts">Home</Link>
         </li>
         <ul className="actions">
           {user ? (
             <>
               <li>Welcome, {user.username}</li>
-              <Link to="create"></Link>
+              <Link to="new-post">New post</Link>
               <li>
                 <a href="" onClick={clickHandler}>
                   Logout

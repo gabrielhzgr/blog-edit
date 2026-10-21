@@ -13,12 +13,15 @@ function Home() {
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/posts");
-  });
+  }, []);
+
   return (
-    <main>
+    <>
       <Nav></Nav>
-      <Outlet></Outlet>
-    </main>
+      <main>
+        <Outlet></Outlet>
+      </main>
+    </>
   );
 }
 
