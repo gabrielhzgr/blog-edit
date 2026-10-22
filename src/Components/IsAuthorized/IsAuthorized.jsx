@@ -1,11 +1,11 @@
 import Fallback from "../Fallback/Fallback.jsx";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth.jsx";
 function IsAuthorized({ children }) {
   const { user } = useAuth();
-  if (!user) {
-    return <Fallback />;
-  } else {
+  if (user.role == "EDITOR") {
     return <>{children}</>;
+  } else {
+    return <Fallback />;
   }
 }
 

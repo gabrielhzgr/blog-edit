@@ -5,8 +5,10 @@ import { Login } from "./routes/Login/Login.jsx";
 import ErrorPage from "./routes/ErrorPage/ErrorPage.jsx";
 import CreatePost from "./routes/CreatePost/CreatePost.jsx";
 import { ListPosts, Post, DefaultPost } from "./routes/Posts/Posts.jsx";
-import IsAuthorized from "./Components/IsAuthorized.jsx/IsAuthorized.jsx";
+import IsAuthenticated from "./Components/IsAuthenticated.jsx/IsAuthenticated.jsx";
+import IsAuthorized from "./Components/IsAuthorized/IsAuthorized.jsx";
 import EditPost from "./routes/EditPost/EditPost.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,9 +18,11 @@ const router = createBrowserRouter([
       {
         path: "posts",
         element: (
-          <IsAuthorized>
-            <ListPosts></ListPosts>
-          </IsAuthorized>
+          <IsAuthenticated>
+            <IsAuthorized>
+              <ListPosts></ListPosts>
+            </IsAuthorized>
+          </IsAuthenticated>
         ),
         children: [
           { index: true, element: <DefaultPost /> },

@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 
 export default function Nav() {
   const navigate = useNavigate();
-  const { user, login, logout } = useAuth();
+  const { user, logout } = useAuth();
 
   async function clickHandler(e) {
     e.preventDefault();
@@ -21,7 +21,10 @@ export default function Nav() {
           {user ? (
             <>
               <li>Welcome, {user.username}</li>
-              <Link to="/new-post">New post</Link>
+              <li>Role: {user.role}</li>
+              <li>
+                <Link to="/new-post">New post</Link>
+              </li>
               <li>
                 <a href="" onClick={clickHandler}>
                   Logout
@@ -29,9 +32,9 @@ export default function Nav() {
               </li>
             </>
           ) : (
-            <>
+            <li>
               <Link to="/login">Login</Link>
-            </>
+            </li>
           )}
         </ul>
       </ul>
