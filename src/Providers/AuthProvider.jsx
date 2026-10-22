@@ -22,6 +22,7 @@ function AuthProvider({ children }) {
   console.log(user);
 
   if (token && !isValidToken(token)) {
+    console.log("not valid token");
     setUser(null);
     setToken(null);
   }
@@ -33,13 +34,9 @@ function AuthProvider({ children }) {
     } else {
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", JSON.stringify(token));
-
-      console.log("loging");
-
       setUser(user);
       setToken(token);
-
-      router.navigate("/");
+      router.navigate("/posts");
     }
   }
 
@@ -50,11 +47,13 @@ function AuthProvider({ children }) {
     setUser(null);
     setToken(null);
 
-    router.navigate("/");
+    router.navigate("/posts");
   }
 
   return (
-    <AuthContext value={{ user, token, error, setError, login, logout }}>
+    <AuthContext
+      value={{ user, setUser, token, error, setError, login, logout }}
+    >
       {children}
     </AuthContext>
   );

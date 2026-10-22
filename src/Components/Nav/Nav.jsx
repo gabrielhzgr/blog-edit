@@ -21,7 +21,7 @@ export default function Nav() {
           {user ? (
             <>
               <li>Welcome, {user.username}</li>
-              <Link to="new-post">New post</Link>
+              <Link to="/new-post">New post</Link>
               <li>
                 <a href="" onClick={clickHandler}>
                   Logout
@@ -30,7 +30,7 @@ export default function Nav() {
             </>
           ) : (
             <>
-              <Link to="login">Login</Link>
+              <Link to="/login">Login</Link>
             </>
           )}
         </ul>

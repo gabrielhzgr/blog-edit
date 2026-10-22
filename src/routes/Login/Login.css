@@ -1,7 +1,12 @@
 main.login {
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-main.login form {
+main.login > form {
   margin-top: 30px;
+}
+
+main.login > * {
+  width: 50%;
 }

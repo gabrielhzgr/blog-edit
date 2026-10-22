@@ -64,12 +64,16 @@ class User {
       const { user, token } = await response.json();
       return { user, token };
     } else {
-      const error = await response.json();
+      let error = await response.json();
+
       return {
-        error: new Response("ResponseError", {
-          status: response.status,
-          statusText: error.error,
-        }),
+        error: Object.assign(
+          new Response(error.name, {
+            status: response.status,
+            statusText: error.error,
+          }),
+          { name: error.name },
+        ),
       };
     }
   }
