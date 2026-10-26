@@ -3,9 +3,19 @@ nav {
   padding: var(--padding);
 }
 
-ul {
+nav ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+}
+
+nav div.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: var(--div-color);
+  backdrop-filter: blur(50px);
+  border-radius: var(--border-radius);
 }

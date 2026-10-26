@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useCallback } from "react";
-import db from "../db/db.js";
+import api from "../api/api.js";
 import isValidToken from "../lib/isValidToken.js";
 import { redirect, useNavigate } from "react-router";
 import router from "../router.jsx";
@@ -9,11 +9,9 @@ function AuthProvider({ children }) {
   const localUser = localStorage.getItem("user");
   const localToken = localStorage.getItem("token");
 
-  const [user, setUser] = useState(
-    localUser == "undefined" ? null : JSON.parse(localUser),
-  );
+  const [user, setUser] = useState(localUser ? JSON.parse(localUser) : null);
   const [token, setToken] = useState(
-    localToken == "undefined" ? null : JSON.parse(localToken),
+    localToken ? JSON.parse(localToken) : null,
   );
 
   const [error, setError] = useState(null);
@@ -28,14 +26,17 @@ function AuthProvider({ children }) {
   }
 
   async function login(credentials) {
-    const { user, token, error } = await db.user.login(credentials);
-    if (error) {
-      setError(error);
+    const result = await api.user.login(credentials);
+    if (result.error) {
+      setError(result.error);
+      setUser(null);
+      setToken(null);
     } else {
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", JSON.stringify(token));
-      setUser(user);
-      setToken(token);
+      localStorage.setItem("user", JSON.stringify(result.user));
+      localStorage.setItem("token", JSON.stringify(result.token));
+      setUser(result.user);
+      setToken(result.token);
+      setError(null);
       router.navigate("/posts");
     }
   }

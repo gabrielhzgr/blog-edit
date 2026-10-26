@@ -1,4 +1,31 @@
+main.create-post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 main.create-post h1 {
   text-align: center;
   width: 100%;
+}
+
+main.create-post label {
+  width: 100%;
+  text-align: center;
+}
+
+main.create-post input {
+  width: 100%;
+  text-align: center;
+}
+
+main.create-post section {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 20px;
+  align-items: center;
+  background-color: var(--div-color);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
 }

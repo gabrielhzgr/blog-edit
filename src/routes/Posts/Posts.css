@@ -9,7 +9,7 @@ section {
   min-height: 100vh;
 }
 
-section article {
+section.posts section.post {
   flex: 3;
 }
 
@@ -21,8 +21,25 @@ aside {
   padding: 0px var(--padding) var(--padding) var(--padding);
 }
 
-aside > * {
-  border-bottom: thin solid grey;
+aside button {
+  background-color: var(--main-color);
+}
+
+aside ul.links {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  background-color: var(--div-color);
+  border-radius: var(--border-radius);
+}
+
+aside ul.links li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  list-style-type: square;
 }
 
 h1 {
@@ -32,10 +49,67 @@ h1 {
 
 article {
   padding: 0px var(--padding) var(--padding) var(--padding);
+  background-color: var(--div-color);
+  border-radius: var(--border-radius);
+  flex: 1;
 }
 
 ul.action-menu {
   display: flex;
   justify-content: flex-end;
   gap: 7px;
+}
+
+article {
+  display: flex;
+  justify-content: center;
+}
+
+span.loading {
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+section.post {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0px var(--padding) var(--padding) var(--padding);
+}
+
+section.post nav {
+  border: none;
+  background-color: var(--div-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+section.post nav a {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: var(--padding);
+  color: white;
+  text-shadow: var(--text-shadow);
+  box-shadow: var(--box-shadow);
+}
+
+a.edit {
+  background-color: orange;
+}
+
+a.delete {
+  background-color: red;
+}
+
+a.publish {
+  background-color: greenyellow;
+}
+
+a.unpublish {
+  background-color: dodgerblue;
 }

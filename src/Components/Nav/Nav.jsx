@@ -20,8 +20,11 @@ export default function Nav() {
         <ul className="actions">
           {user ? (
             <>
-              <li>Welcome, {user.username}</li>
-              <li>Role: {user.role}</li>
+              <div className="user-info">
+                <li>Welcome, {user.username}</li>
+                <li>Role: {user.role}</li>
+              </div>
+
               <li>
                 <Link to="/new-post">New post</Link>
               </li>

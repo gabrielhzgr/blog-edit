@@ -5,7 +5,7 @@ function IsAuthorized({ children }) {
   if (user.role == "EDITOR") {
     return <>{children}</>;
   } else {
-    return <Fallback />;
+    return <Fallback message="You are not authorized" />;
   }
 }
 

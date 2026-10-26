@@ -4,10 +4,13 @@ import Home from "./routes/Home/Home.jsx";
 import { Login } from "./routes/Login/Login.jsx";
 import ErrorPage from "./routes/ErrorPage/ErrorPage.jsx";
 import CreatePost from "./routes/CreatePost/CreatePost.jsx";
-import { ListPosts, Post, DefaultPost } from "./routes/Posts/Posts.jsx";
+import { ListPosts, DefaultPost, Post } from "./routes/Posts/Posts.jsx";
 import IsAuthenticated from "./Components/IsAuthenticated.jsx/IsAuthenticated.jsx";
 import IsAuthorized from "./Components/IsAuthorized/IsAuthorized.jsx";
 import EditPost from "./routes/EditPost/EditPost.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -20,14 +23,17 @@ const router = createBrowserRouter([
         element: (
           <IsAuthenticated>
             <IsAuthorized>
-              <ListPosts></ListPosts>
+              <QueryClientProvider client={queryClient}>
+                <ListPosts></ListPosts>
+              </QueryClientProvider>
             </IsAuthorized>
           </IsAuthenticated>
         ),
         children: [
-          { index: true, element: <DefaultPost /> },
+          { index: true, element: <DefaultPost message="Select a post" /> },
           {
-            path: ":index",
+            path: ":id",
+
             children: [
               { index: true, element: <Post /> },
               { path: "edit", element: <EditPost /> },
@@ -35,13 +41,17 @@ const router = createBrowserRouter([
           },
         ],
       },
-      { path: "new-post", element: <CreatePost /> },
+      {
+        path: "new-post",
+        element: <CreatePost />,
+      },
     ],
   },
 
   {
     path: "login",
     element: <Login />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

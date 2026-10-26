@@ -41,12 +41,7 @@ function Login() {
     <>
       <Nav></Nav>
       <main className="login">
-        {error ? (
-          <Error
-            title={`${error.status}: ${error.name} `}
-            message={error.statusText}
-          />
-        ) : null}
+        {error ? <Error error={error} /> : null}
         {isPending ? "Verifying" : null}
         <form method="POST" onSubmit={handleSubmit}>
           <h1>Login as editor</h1>

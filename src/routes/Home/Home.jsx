@@ -4,7 +4,7 @@
 // import viteLogo from "./assets/vite.svg";
 import "./Home.css";
 import Nav from "../../Components/Nav/Nav.jsx";
-import { Outlet, redirect } from "react-router";
+import { Outlet, redirect, useLocation, useParams } from "react-router";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth.jsx";
@@ -13,15 +13,20 @@ import useAuth from "../../hooks/useAuth.jsx";
 function Home() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const params = useParams();
+  const logation = useLocation();
   useEffect(() => {
-    navigate("/posts");
-  }, [user]);
+    if (location == "/") {
+      navigate("/posts");
+    }
+  }, []);
 
   return (
     <>
       <Nav></Nav>
-
-      <Outlet></Outlet>
+      <main>
+        <Outlet></Outlet>
+      </main>
     </>
   );
 }
