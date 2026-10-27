@@ -8,25 +8,17 @@ function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, user, setUser, error, setError } = useAuth();
-  const [isPending, setPending] = useState(false);
-
-  useEffect(() => {
-    if (isPending) {
-      if (user || error) {
-        setPending(false);
-      } else {
-        login({ username, password });
-      }
-    }
-  }, [isPending, user, error]);
+  const { login, error, isPending, setPending } = useAuth();
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    e.target.querySelector("button").disabled = true;
-    setPending(true);
-    setError(null);
-    setUser(null);
+    try {
+      e.preventDefault();
+      e.target.querySelector("button").disabled = true;
+      setPending(true);
+      login({ username, password });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const button = isPending ? (

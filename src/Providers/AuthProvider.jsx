@@ -13,7 +13,7 @@ function AuthProvider({ children }) {
   const [token, setToken] = useState(
     localToken ? JSON.parse(localToken) : null,
   );
-
+  const [isPending, setPending] = useState(false);
   const [error, setError] = useState(null);
 
   console.log(token);
@@ -26,18 +26,28 @@ function AuthProvider({ children }) {
   }
 
   async function login(credentials) {
-    const result = await api.user.login(credentials);
-    if (result.error) {
-      setError(result.error);
+    try {
+      const result = await api.user.login(credentials);
+      if (result.error) {
+        setError(result.error);
+        setUser(null);
+        setToken(null);
+        setPending(false);
+      } else {
+        localStorage.setItem("user", JSON.stringify(result.user));
+        localStorage.setItem("token", JSON.stringify(result.token));
+        setError(null);
+        setUser(result.user);
+        setToken(result.token);
+        setPending(false);
+        router.navigate("/posts");
+      }
+    } catch (err) {
+      setError(err);
+      setError(null);
       setUser(null);
       setToken(null);
-    } else {
-      localStorage.setItem("user", JSON.stringify(result.user));
-      localStorage.setItem("token", JSON.stringify(result.token));
-      setUser(result.user);
-      setToken(result.token);
-      setError(null);
-      router.navigate("/posts");
+      setPending(false);
     }
   }
 
@@ -53,7 +63,7 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext
-      value={{ user, setUser, token, error, setError, login, logout }}
+      value={{ user, token, error, isPending, setPending, login, logout }}
     >
       {children}
     </AuthContext>

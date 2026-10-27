@@ -131,7 +131,7 @@ class User extends API {
 }
 
 //const baseUrl = import.meta.env.VITE_BLOG_API_URL;
-const baseUrl = import.meta.env.VITE_DEV_API_URL;
+const baseUrl = import.meta.env.VITE_BLOG_API_URL;
 const user = new User(baseUrl);
 const post = new Post(baseUrl);
 

@@ -29,6 +29,7 @@ a:visited {
 h1,
 h2 {
   color: var(--main-color);
+  text-align: center;
 }
 
 a:hover body,
@@ -79,6 +80,7 @@ form label {
   flex-direction: column;
   gap: 5px;
   font-style: italic;
+  text-align: center;
 }
 
 button {
