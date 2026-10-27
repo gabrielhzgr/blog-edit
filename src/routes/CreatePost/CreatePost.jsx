@@ -1,23 +1,23 @@
 import "./CreatePost.css";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
-import { Editor } from "@tinymce/tinymce-react";
+//import { Editor } from "@tinymce/tinymce-react";
 import api from "../../api/api.js";
 import useAuth from "../../hooks/useAuth.jsx";
+import Editor from "../../Components/Editor/Editor.jsx";
 function CreatePost() {
   const editorRef = useRef(null);
   const { user } = useAuth();
   const [title, setTitle] = useState();
   const [isPending, setPending] = useState(false);
   const [error, setError] = useState(null);
-  const [content, setContent] = useState(null);
 
   const navigate = useNavigate();
 
-  console.log(content);
+  async function createPost(content) {
+    try {
+      console.log(editorRef);
 
-  useEffect(() => {
-    async function createPost() {
       const result = await api.post.create({
         title,
         content,
@@ -29,31 +29,28 @@ function CreatePost() {
       }
 
       if (result.post) {
-        setContent(null);
         navigate("/posts");
       }
+    } catch (err) {
+      setError(error);
     }
-
-    if (isPending) {
-      createPost();
-    }
-  }, [isPending]);
+  }
 
   function changeHandler(e) {
     setTitle(e.target.value);
   }
 
-  const savePost = async () => {
+  async function savePost() {
     if (editorRef.current) {
-      const content = editorRef.current.getContent();
-      setContent(content);
       setPending(true);
+      createPost(editorRef.current.getContent());
     }
-  };
+  }
   return (
     <main className="create-post">
+      {error ? <Error error={error} /> : null}
       <h1>New post</h1>
-      <section>
+      <form className="post">
         <label htmlFor="title">
           <h2>Title</h2>
           <input
@@ -66,40 +63,8 @@ function CreatePost() {
           />
         </label>
         <Editor
-          apiKey={import.meta.env.VITE_TINY_API_KEY}
-          onInit={(evt, editor) => (editorRef.current = editor)}
+          editorRef={editorRef}
           initialValue="<p>This is the initial content of the editor.</p>"
-          init={{
-            height: 500,
-            menubar: false,
-            plugins: [
-              "advlist",
-              "autolink",
-              "lists",
-              "link",
-              "image",
-              "charmap",
-              "preview",
-              "anchor",
-              "searchreplace",
-              "visualblocks",
-              "code",
-              "fullscreen",
-              "insertdatetime",
-              "media",
-              "table",
-              "code",
-              "help",
-              "wordcount",
-            ],
-            toolbar:
-              "undo redo | blocks | " +
-              "bold italic forecolor | alignleft aligncenter " +
-              "alignright alignjustify | bullist numlist outdent indent | " +
-              "removeformat | help",
-            content_style:
-              "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-          }}
         />
         {isPending ? (
           <button disabled onClick={savePost}>
@@ -108,7 +73,7 @@ function CreatePost() {
         ) : (
           <button onClick={savePost}>Save post</button>
         )}
-      </section>
+      </form>
     </main>
   );
 }

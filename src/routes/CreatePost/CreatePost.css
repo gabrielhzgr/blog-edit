@@ -9,17 +9,7 @@ main.create-post h1 {
   width: 100%;
 }
 
-main.create-post label {
-  width: 100%;
-  text-align: center;
-}
-
-main.create-post input {
-  width: 100%;
-  text-align: center;
-}
-
-main.create-post section {
+main.create-post form {
   display: flex;
   flex-direction: column;
   width: 70%;

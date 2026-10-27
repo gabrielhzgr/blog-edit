@@ -75,6 +75,10 @@ form {
   height: fit-content;
 }
 
+form > * {
+  width: 100%;
+}
+
 form label {
   display: flex;
   flex-direction: column;

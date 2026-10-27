@@ -47,24 +47,17 @@ h1 {
   margin-bottom: 10px;
 }
 
-article {
-  padding: 0px var(--padding) var(--padding) var(--padding);
-  background-color: var(--div-color);
-  border-radius: var(--border-radius);
-  flex: 1;
-}
-
 ul.action-menu {
   display: flex;
   justify-content: flex-end;
   gap: 7px;
 }
 
-article {
-  display: flex;
-  justify-content: center;
+article.post {
+  background-color: var(--div-color);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
 }
-
 span.loading {
   width: 100%;
   justify-content: center;
@@ -76,8 +69,13 @@ span.loading {
 section.post {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   padding: 0px var(--padding) var(--padding) var(--padding);
+}
+
+section.post form {
+  width: 90%;
 }
 
 section.post nav {
@@ -87,6 +85,14 @@ section.post nav {
   display: flex;
   gap: 10px;
   justify-content: flex-end;
+}
+
+section.post > * {
+  width: 100%;
+}
+
+section.post > article {
+  flex: 3;
 }
 
 section.post nav a {

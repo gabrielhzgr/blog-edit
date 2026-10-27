@@ -30,7 +30,7 @@ export default function ErrorPage() {
     <div id="error">
       <h1>{title}</h1>
       <p>{message}</p>
-      <Link to=".">Go back</Link>
+      <Link to="/posts">Go to home page</Link>
       <NavLink></NavLink>
     </div>
   );

@@ -21,7 +21,7 @@ function Error({ error }) {
     message = error.message;
   } else {
     title = "Error";
-    message = error.error.toString();
+    message = error.toString();
   }
   return (
     <div className="error">
