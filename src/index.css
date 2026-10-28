@@ -13,7 +13,7 @@
   --box-shadow: 2px 2px black;
   --text-shadow: 1px 1px black;
   --padding: 20px;
-  --border-radius: 10px;
+  --border-radius: 20px;
 }
 
 a {
@@ -113,4 +113,21 @@ div {
 
 *:disabled {
   background-color: grey;
+}
+
+@keyframes loading {
+  from {
+    background-color: grey;
+  }
+
+  to {
+    background-color: white;
+  }
+}
+
+.loading {
+  animation: loading;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }

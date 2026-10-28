@@ -38,7 +38,7 @@ function usePosts(page) {
     getPosts();
   }, [page, refetch]);
 
-  return { posts, setPosts, error, isPending, setPending, setRefetch };
+  return { posts, setPosts, error, isPending, setPending, refetch, setRefetch };
 }
 
 export default usePosts;

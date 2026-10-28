@@ -25,10 +25,15 @@ aside button {
   background-color: var(--main-color);
 }
 
+.loading:has(.loading) {
+  background-color: transparent;
+}
+
 aside ul.links {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  gap: 10px;
   background-color: var(--div-color);
   border-radius: var(--border-radius);
 }
@@ -40,6 +45,7 @@ aside ul.links li {
   align-items: center;
   padding: 10px;
   list-style-type: square;
+  border-radius: var(--border-radius);
 }
 
 h1 {
@@ -95,27 +101,27 @@ section.post > article {
   flex: 3;
 }
 
-section.post nav a {
+section.post nav * {
   text-decoration: none;
   padding: 10px;
-  border-radius: var(--padding);
+  border-radius: var(--border-radius);
   color: white;
   text-shadow: var(--text-shadow);
   box-shadow: var(--box-shadow);
 }
 
-a.edit {
+*.edit {
   background-color: orange;
 }
 
-a.delete {
+*.delete {
   background-color: red;
 }
 
-a.publish {
+*.pub {
   background-color: greenyellow;
 }
 
-a.unpublish {
+*.unp {
   background-color: dodgerblue;
 }

@@ -14,9 +14,9 @@ function Home() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const params = useParams();
-  const logation = useLocation();
+  const location = useLocation();
   useEffect(() => {
-    if (location == "/") {
+    if (location.pathname == "/") {
       navigate("/posts");
     }
   }, []);

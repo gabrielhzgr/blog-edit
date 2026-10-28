@@ -118,6 +118,29 @@ class Post extends API {
       };
     }
   }
+
+  async deletePost(id) {
+    const url = `${this.baseUrl}/posts/${id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: this.getHeaders(),
+    });
+    if (response.status == 200) {
+      const result = await response.json();
+      return result;
+    } else {
+      let error = await response.json();
+      return {
+        error: Object.assign(
+          new Response(error.name, {
+            status: response.status,
+            statusText: error.error,
+          }),
+          { name: error.name },
+        ),
+      };
+    }
+  }
 }
 
 class User extends API {

@@ -10,6 +10,7 @@ function usePost(id) {
     async function getPost() {
       try {
         const result = await api.post.getPost(id);
+
         if (result.error) {
           setError(result.error);
           setPending(false);
@@ -24,16 +25,12 @@ function usePost(id) {
         setError(err);
       }
     }
+    if (isPending) {
+      getPost();
+    }
+  }, [id, isPending]);
 
-    getPost();
-
-    return () => {
-      setPending(true);
-      setPost(null);
-    };
-  }, [id]);
-
-  return { post, isPending, error };
+  return { post, setPost, isPending, error, setPending };
 }
 
 export default usePost;

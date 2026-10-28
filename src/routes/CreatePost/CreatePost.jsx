@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import api from "../../api/api.js";
 import useAuth from "../../hooks/useAuth.jsx";
 import Editor from "../../Components/Editor/Editor.jsx";
+import Error from "../../Components/Error/Error.jsx";
 function CreatePost() {
   const editorRef = useRef(null);
   const { user } = useAuth();
@@ -48,7 +49,7 @@ function CreatePost() {
   }
   return (
     <main className="create-post">
-      {error ? <Error error={error} /> : null}
+      {error && !isPending ? <Error error={error} /> : null}
       <h1>New post</h1>
       <form className="post">
         <label htmlFor="title">
