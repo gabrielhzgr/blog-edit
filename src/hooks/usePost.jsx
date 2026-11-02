@@ -25,10 +25,14 @@ function usePost(id) {
         setError(err);
       }
     }
-    if (isPending) {
-      getPost();
-    }
-  }, [id, isPending]);
+
+    getPost();
+
+    return () => {
+      setPending(true);
+      setPost(null);
+    };
+  }, [id]);
 
   return { post, setPost, isPending, error, setPending };
 }
