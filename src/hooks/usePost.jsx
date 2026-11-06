@@ -13,13 +13,12 @@ function usePost(id) {
 
         if (result.error) {
           setError(result.error);
-          setPending(false);
         }
 
         if (result.post) {
           setPost(result.post);
-          setPending(false);
         }
+        setPending(false);
       } catch (err) {
         setPending(false);
         setError(err);
@@ -27,12 +26,7 @@ function usePost(id) {
     }
 
     getPost();
-
-    return () => {
-      setPending(true);
-      setPost(null);
-    };
-  }, [id]);
+  }, [id, isPending]);
 
   return { post, setPost, isPending, error, setPending };
 }

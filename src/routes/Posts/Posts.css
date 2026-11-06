@@ -63,6 +63,8 @@ article.post {
   background-color: var(--div-color);
   border-radius: var(--border-radius);
   padding: var(--padding);
+  overflow-x: scroll;
+  width: 100%;
 }
 span.loading {
   width: 100%;
@@ -78,6 +80,8 @@ section.post {
   align-items: center;
   gap: 20px;
   padding: 0px var(--padding) var(--padding) var(--padding);
+  max-width: 1000px;
+  overflow-x: scroll;
 }
 
 section.post form {

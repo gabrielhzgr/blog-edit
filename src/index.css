@@ -32,7 +32,7 @@ h2 {
   text-align: center;
 }
 
-a:hover body,
+body,
 html {
   min-width: 100vw;
   min-height: 100vh;

@@ -50,7 +50,7 @@ class Post extends API {
 
   async getPosts(page) {
     const limit = 10;
-    const url = `${this.baseUrl}/posts?page=${page}&limit=${limit}`;
+    const url = `${this.baseUrl}/posts?role=editor&page=${page}&limit=${limit}`;
     const response = await fetch(url, {
       method: "GET",
       headers: this.getHeaders(),
@@ -178,7 +178,7 @@ class User extends API {
 }
 
 //const baseUrl = import.meta.env.VITE_BLOG_API_URL;
-const baseUrl = import.meta.env.VITE_BLOG_API_URL;
+const baseUrl = `${import.meta.env.VITE_DEV_API_URL}`;
 const user = new User(baseUrl);
 const post = new Post(baseUrl);
 

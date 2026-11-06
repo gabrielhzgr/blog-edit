@@ -117,7 +117,6 @@ function Post() {
   async function pubStatusPost(e) {
     async function change() {
       const result = await api.post.updatePost(id, {
-        ...post,
         isPublished: !post.isPublished,
       });
       setPendingAction("");
