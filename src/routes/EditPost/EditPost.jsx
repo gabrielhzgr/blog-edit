@@ -20,12 +20,6 @@ function EditPost() {
 
   const editorRef = useRef(null);
 
-  useEffect(() => {
-    if (post) {
-      titleRef.current.value = post.title;
-    }
-  }, [post]);
-
   async function saveEdit(id, title, content) {
     try {
       const result = await api.post.updatePost(id, { title, content });
@@ -69,7 +63,7 @@ function EditPost() {
             ref={titleRef}
             placeholder="My post"
             type="text"
-            value={title}
+            defaultValue={post ? post.title : ""}
             onChange={changeHandler}
             required
           />
