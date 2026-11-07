@@ -10,7 +10,6 @@ function EditPost() {
   const { id } = useParams();
   const { setRefetch } = useOutletContext();
   const { post, isPending, error } = usePost(id);
-  const [title, setTitle] = useState("");
   const titleRef = useRef(null);
 
   const [isPendingSave, setPendingSave] = useState();
@@ -42,12 +41,8 @@ function EditPost() {
     if (editorRef.current) {
       setPendingSave(true);
       setErrorSave(null);
-      saveEdit(id, title, editorRef.current.getContent());
+      saveEdit(id, titleRef.value, editorRef.current.getContent());
     }
-  }
-
-  function changeHandler(e) {
-    setTitle(e.target.value);
   }
 
   return (
@@ -64,7 +59,6 @@ function EditPost() {
             placeholder="My post"
             type="text"
             defaultValue={post ? post.title : ""}
-            onChange={changeHandler}
             required
           />
         </label>
